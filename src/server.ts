@@ -46,15 +46,13 @@ app.use(session({
 app.use('/api', apiRouter);
 
 // --- Static File Serving ---
-// Serve the built React frontend
-const frontendPath = path.join(__dirname, '..', '..', 'public');
-app.use(express.static(frontendPath));
+// Desnecessário porque o frontend está no cPanel
+// const frontendPath = path.join(__dirname, '..', '..', 'public');
+// app.use(express.static(frontendPath));
 
-// For any other route, serve the index.html from the React app
-// This allows React Router to handle the client-side routing
-app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
-});
+// app.get('*', (req: Request, res: Response) => {
+//   res.sendFile(path.join(frontendPath, 'index.html'));
+// });
 
 // --- Error Handling Middleware ---
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -67,3 +65,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
   console.log(`✔️  Frontend served from: ${frontendPath}`);
 });
+
+
