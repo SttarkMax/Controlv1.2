@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 3001;
 
 // --- Middleware ---
 app.use(cors({
-  origin: `http://localhost:${PORT}`, // Allow requests from where the app is served
+  origin: 'https://maxcontrol.f13design.com.br',
   credentials: true,
 }));
 
