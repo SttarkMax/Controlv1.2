@@ -63,7 +63,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 // --- Server Startup ---
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
-  console.log(`✔️  Frontend served from: ${frontendPath}`);
+  console.log(`✔️  Backend server is running on http://localhost:${PORT}`);
 });
 
 
