@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const path_1 = __importDefault(require("path"));
 const express_session_1 = __importDefault(require("express-session"));
 const routes_1 = __importDefault(require("./routes"));
 dotenv_1.default.config();
@@ -14,7 +13,7 @@ const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3001;
 // --- Middleware ---
 app.use((0, cors_1.default)({
-    origin: `http://localhost:${PORT}`, // Allow requests from where the app is served
+    origin: 'https://maxcontrol.f13design.com.br',
     credentials: true,
 }));
 // Increase payload size limit for base64 logos
@@ -33,14 +32,12 @@ app.use((0, express_session_1.default)({
 // --- API Routes ---
 app.use('/api', routes_1.default);
 // --- Static File Serving ---
-// Serve the built React frontend
-const frontendPath = path_1.default.join(__dirname, '..', '..', 'public');
-app.use(express_1.default.static(frontendPath));
-// For any other route, serve the index.html from the React app
-// This allows React Router to handle the client-side routing
-app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(frontendPath, 'index.html'));
-});
+// Desnecessário porque o frontend está no cPanel
+// const frontendPath = path.join(__dirname, '..', '..', 'public');
+// app.use(express.static(frontendPath));
+// app.get('*', (req: Request, res: Response) => {
+//   res.sendFile(path.join(frontendPath, 'index.html'));
+// });
 // --- Error Handling Middleware ---
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -49,5 +46,5 @@ app.use((err, req, res, next) => {
 // --- Server Startup ---
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
-    console.log(`✔️  Frontend served from: ${frontendPath}`);
+    console.log(`✔️  Backend server is running on http://localhost:${PORT}`);
 });
